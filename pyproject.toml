@@ -1,0 +1,19 @@
+[project]
+name = "course-assignments"
+version = "0.1.0"
+description = "Домашние задания и мини-проекты"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+lint = [
+    "ruff>=0.16.10",
+]
+tests = [
+    "pytest>=9.1.1",
+    "pytest-timeout>=2.4.0",
+]
+
+[tool.ruff]
+line-length = 120
