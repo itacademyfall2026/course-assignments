@@ -71,8 +71,6 @@ python -m pytest
 ```bash
 git switch main
 git pull --ff-only origin main
-git fetch upstream
-git merge upstream/main
 git submodule sync --recursive
 git submodule update --init --recursive
 git push origin main
