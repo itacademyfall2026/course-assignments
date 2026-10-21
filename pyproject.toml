@@ -17,3 +17,10 @@ tests = [
 
 [tool.ruff]
 line-length = 120
+
+[tool.pytest]
+addopts = ["--doctest-modules"]
+testpaths = [
+    "tests",
+    "homeworks/homeworks_03"
+]
