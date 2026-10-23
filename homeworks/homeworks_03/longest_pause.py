@@ -11,8 +11,8 @@ def find_longest_pause():
     (14, 18, 4)
     >>> find_longest_pause(2, 5, 8, 10)
     (2, 5, 3)
-    >>> find_longest_pause(7)
-    None
+    >>> find_longest_pause(7) is None
+    True
     >>> find_longest_pause(8, 12, 10)
     Traceback (most recent call last):
         ...
