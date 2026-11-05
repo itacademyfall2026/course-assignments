@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#141513">
+  <meta name="description"
+    content="Ответы на частые вопросы о кинотеатре «Кадр»: афиша, фильмы, подготовка к сеансу, адрес и контакты.">
+  <title>Вопросы и ответы — кинотеатр «Кадр»</title>
+  <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="../static/faq.css">
+  <script src="../static/schedule.js" defer></script>
+</head>
+
+<body data-period="today">
+  <a class="skip-link" href="#questions">Перейти к вопросам</a>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Кадр — главная">
+        <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <rect x="4" y="4" width="32" height="32" rx="9" stroke="currentColor" stroke-width="2" />
+          <path d="M14 12v16m12-16-8 8 8 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        <span>кадр<span class="brand-dot">.</span></span>
+      </a>
+      <span class="brand-caption">НЕЗАВИСИМЫЙ КИНОТЕАТР</span>
+      <nav class="header-nav" aria-label="Основная навигация">
+        <details class="schedule-menu">
+          <summary class="schedule-toggle">Афиша <span class="menu-period"><span class="only-today">сегодня</span><span
+                class="only-tomorrow">завтра</span><span class="only-day-after"
+                data-date="day-after">послезавтра</span><span class="only-week">на неделю</span></span><span
+              class="chevron" aria-hidden="true"></span></summary>
+          <div class="dropdown">
+            <a href="/" aria-current="page">Сегодня <span data-date="today">Сегодня</span></a>
+            <a href="/tomorrow">Завтра <span data-date="tomorrow">Завтра</span></a>
+            <a href="/week">На неделю <span data-date="week">7 дней</span></a>
+          </div>
+        </details>
+        <a class="about-link" href="#contacts">О кинотеатре <span aria-hidden="true">↗</span></a>
+      </nav>
+      <span class="city"><span class="location-dot" aria-hidden="true"></span> Минск</span>
+    </div>
+  </header>
+
+  <main class="container faq-page" id="questions">
+    <nav class="faq-breadcrumbs" aria-label="Хлебные крошки">
+      <a href="/">Афиша</a><span aria-hidden="true">/</span><span aria-current="page">Вопросы и ответы</span>
+    </nav>
+    <div class="faq-intro">
+      <div class="eyebrow"><span></span> ПЕРЕД ТЕМ КАК ПОГАСНЕТ СВЕТ</div>
+      <h1>Вы спрашиваете.<br>Мы отвечаем<span class="accent">.</span></h1>
+      <p>Всё, что поможет спланировать ваш вечер в кино.</p>
+    </div>
+
+    <div class="faq-layout">
+      <aside class="faq-sidebar">
+        <nav class="faq-categories" aria-label="Темы вопросов">
+          <span class="eyebrow">ВЫБЕРИТЕ ТЕМУ</span>
+          <a href="#schedule">Афиша и фильмы <span aria-hidden="true">↗</span></a>
+          <a href="#visit">Перед сеансом <span aria-hidden="true">↗</span></a>
+          <a href="#location">Адрес и контакты <span aria-hidden="true">↗</span></a>
+        </nav>
+        <div class="faq-support">
+          <h2>Остались вопросы?</h2>
+          <p>Напишите нам — поможем разобраться.</p>
+          <a href="mailto:hello@kadr.example?subject=Вопрос%20о%20кинотеатре">Задать вопрос <span aria-hidden="true">↗</span></a>
+        </div>
+      </aside>
+
+      <div class="faq-groups">
+        <section class="faq-group" id="schedule" aria-labelledby="schedule-title">
+          <h2 id="schedule-title"><span class="faq-number" aria-hidden="true">01</span> Афиша и фильмы</h2>
+          <details class="faq-item" open>
+            <summary>Как посмотреть афишу на другой день?</summary>
+            <div class="faq-answer"><p>Откройте меню «Афиша» в шапке сайта и выберите «Сегодня», «Завтра» или «На неделю».
+              Внизу афиши также есть кнопка перехода к следующему периоду.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Где найти описание фильма и трейлер?</summary>
+            <div class="faq-answer"><p>Если у фильма есть отдельная страница, его карточка в афише открывается по нажатию.
+              На странице фильма можно прочитать описание, узнать режиссёра и актёров и посмотреть трейлер.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Что означает возрастной рейтинг на постере?</summary>
+            <div class="faq-answer"><p>Число на постере обозначает возрастную категорию фильма.
+              Учитывайте её при выборе фильма для детей. Если сомневаетесь, уточните условия посещения у сотрудников кинотеатра.</p></div>
+          </details>
+        </section>
+
+        <section class="faq-group" id="visit" aria-labelledby="visit-title">
+          <h2 id="visit-title"><span class="faq-number" aria-hidden="true">02</span> Перед сеансом</h2>
+          <details class="faq-item">
+            <summary>За сколько до сеанса лучше приходить?</summary>
+            <div class="faq-answer"><p>Приходите за 15–20 минут: так будет время забрать билеты,
+              выбрать напитки и найти свой ряд.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Где указана продолжительность фильма?</summary>
+            <div class="faq-answer"><p>Продолжительность в минутах указана под постером в афише,
+              рядом с флагом страны, а также на отдельной странице фильма.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Как уточнить стоимость и наличие билетов?</summary>
+            <div class="faq-answer"><p>Позвоните по номеру <a href="tel:+375171234567">+375 (17) 123-45-67</a>.
+              Сотрудники кинотеатра помогут уточнить информацию о выбранном сеансе.</p></div>
+          </details>
+        </section>
+
+        <section class="faq-group" id="location" aria-labelledby="location-title">
+          <h2 id="location-title"><span class="faq-number" aria-hidden="true">03</span> Адрес и контакты</h2>
+          <details class="faq-item">
+            <summary>Где находится кинотеатр и когда он открыт?</summary>
+            <div class="faq-answer"><p>Наш адрес: Минск, пр-т Независимости, 25.
+              Кинотеатр открыт ежедневно с 10:00 до 23:30.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Как связаться с кинотеатром?</summary>
+            <div class="faq-answer"><p>Позвоните по номеру <a href="tel:+375171234567">+375 (17) 123-45-67</a>
+              или напишите на <a href="mailto:hello@kadr.example">hello@kadr.example</a>.
+              Ссылку на обратную связь вы также найдёте внизу каждой страницы.</p></div>
+          </details>
+        </section>
+      </div>
+    </div>
+
+    <div class="faq-return"><span>Все ответы нашли? Самое время выбрать фильм.</span>
+      <a class="next-button" href="/">К афише <b aria-hidden="true">↗</b></a>
+    </div>
+  </main>
+
+  <footer id="contacts">
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand"><a class="brand" href="/">кадр<span class="brand-dot">.</span></a>
+          <p>Кино, которое остаётся с тобой.</p>
+        </div>
+        <div class="footer-column">
+          <h2>ЖДЁМ В ГОСТИ</h2>
+          <p>Минск, пр-т Независимости, 25</p><span>Ежедневно, 10:00–23:30</span>
+        </div>
+        <div class="footer-column">
+          <h2>НА СВЯЗИ</h2><a href="tel:+375171234567">+375 (17) 123-45-67</a><a
+            href="mailto:hello@kadr.example">hello@kadr.example</a>
+        </div>
+        <nav class="footer-links" aria-label="Помощь"><a href="#questions" aria-current="page">Вопросы и ответы <span
+              aria-hidden="true">↗</span></a><a href="mailto:hello@kadr.example?subject=Обратная%20связь">Обратная связь
+            <span aria-hidden="true">↗</span></a></nav>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Кинотеатр «Кадр»</span><span>Демонстрационная афиша · Контакты приведены
+          для примера</span><span class="footer-sign">УВИДИМСЯ В КИНО <span aria-hidden="true">✳</span></span></div>
+    </div>
+  </footer>
+</body>
+
+</html>

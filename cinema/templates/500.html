@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#141513">
+  <meta name="description"
+    content="Временная ошибка сервера кинотеатра «Кадр». Попробуйте открыть страницу чуть позже.">
+  <title>500 — Ошибка сервера | Кадр</title>
+  <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="../static/error.css">
+  <script src="../static/schedule.js" defer></script>
+</head>
+
+<body class="error-layout" data-period="today">
+  <a class="skip-link" href="#error">Перейти к содержимому</a>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Кадр — главная">
+        <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <rect x="4" y="4" width="32" height="32" rx="9" stroke="currentColor" stroke-width="2" />
+          <path d="M14 12v16m12-16-8 8 8 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        <span>кадр<span class="brand-dot">.</span></span>
+      </a>
+      <span class="brand-caption">НЕЗАВИСИМЫЙ КИНОТЕАТР</span>
+      <nav class="header-nav" aria-label="Основная навигация">
+        <details class="schedule-menu">
+          <summary class="schedule-toggle">Афиша <span class="menu-period"><span class="only-today">сегодня</span><span
+                class="only-tomorrow">завтра</span><span class="only-day-after"
+                data-date="day-after">послезавтра</span><span class="only-week">на неделю</span></span><span
+              class="chevron" aria-hidden="true"></span></summary>
+          <div class="dropdown">
+            <a href="/" aria-current="page">Сегодня <span data-date="today">Сегодня</span></a>
+            <a href="/tomorrow">Завтра <span data-date="tomorrow">Завтра</span></a>
+            <a href="/week">На неделю <span data-date="week">7 дней</span></a>
+          </div>
+        </details>
+        <a class="about-link" href="#contacts">О кинотеатре <span aria-hidden="true">↗</span></a>
+      </nav>
+      <span class="city"><span class="location-dot" aria-hidden="true"></span> Минск</span>
+    </div>
+  </header>
+
+  <main class="container error-page" id="error">
+    <div class="error-content">
+      <p class="eyebrow error-eyebrow"><span></span> ОШИБКА 500</p>
+      <p class="error-code" aria-hidden="true">5<span>0</span>0</p>
+      <h1>Небольшая пауза<br>в показе<span class="accent">.</span></h1>
+      <p class="error-description">На сервере произошла ошибка.<br>
+        Попробуйте открыть страницу чуть позже.</p>
+      <a class="next-button error-button" href="/">Вернуться к афише <b aria-hidden="true">↗</b></a>
+      <p class="error-help">Ошибка повторяется? <a href="mailto:hello@kadr.example?subject=Ошибка%20500%20на%20сайте">Напишите нам</a></p>
+    </div>
+  </main>
+
+  <footer id="contacts">
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand"><a class="brand" href="/">кадр<span class="brand-dot">.</span></a>
+          <p>Кино, которое остаётся с тобой.</p>
+        </div>
+        <div class="footer-column">
+          <h2>ЖДЁМ В ГОСТИ</h2>
+          <p>Минск, пр-т Независимости, 25</p><span>Ежедневно, 10:00–23:30</span>
+        </div>
+        <div class="footer-column">
+          <h2>НА СВЯЗИ</h2><a href="tel:+375171234567">+375 (17) 123-45-67</a><a
+            href="mailto:hello@kadr.example">hello@kadr.example</a>
+        </div>
+        <nav class="footer-links" aria-label="Помощь"><a href="/faq">Вопросы и ответы <span
+              aria-hidden="true">↗</span></a><a href="mailto:hello@kadr.example?subject=Обратная%20связь">Обратная связь
+            <span aria-hidden="true">↗</span></a></nav>
+      </div>
+      <section class="faq" id="faq" aria-label="Вопросы и ответы">
+        <details>
+          <summary>За сколько до сеанса лучше приходить?</summary>
+          <p>Приходите за 15–20 минут: так будет время забрать билеты, выбрать напитки и найти свой ряд.</p>
+        </details>
+        <details>
+          <summary>Что означает возрастной рейтинг на постере?</summary>
+          <p>Число на постере обозначает возрастную категорию фильма. Учитывайте её при выборе фильма для детей.</p>
+        </details>
+      </section>
+      <div class="footer-bottom"><span>© 2026 Кинотеатр «Кадр»</span><span>Демонстрационная афиша · Контакты приведены
+          для примера</span><span class="footer-sign">УВИДИМСЯ В КИНО <span aria-hidden="true">✳</span></span></div>
+    </div>
+  </footer>
+</body>
+
+</html>
