@@ -13,10 +13,6 @@
 </head>
 
 <body data-period="today">
-  <p>{{ now }}</p>
-  <p>{{ now }}</p>
-  <p>{{ 1 + 1 }}</p>
-  <p>{{ abracadabra }}</p>
   <a class="skip-link" href="#movies">Перейти к фильмам</a>
 
   <header class="header">
@@ -44,7 +40,11 @@
         </details>
         <a class="about-link" href="#contacts">О кинотеатре <span aria-hidden="true">↗</span></a>
       </nav>
+      {% if username %}
+      <span class="city"><span class="location-dot" aria-hidden="true"></span> {{ username }}</span>
+      {% else %}
       <span class="city"><span class="location-dot" aria-hidden="true"></span> Минск</span>
+      {% endif %}
     </div>
   </header>
 
@@ -66,76 +66,32 @@
             class="only-tomorrow" data-date="tomorrow" data-date-format="full">Завтра</span><span class="only-day-after"
             data-date="day-after" data-date-format="full">Послезавтра</span><span class="only-week" data-date="week"
             data-date-format="full">Ближайшие 7 дней</span></div>
-        <p class="film-count"><span class="only-today">6 фильмов</span><span class="only-tomorrow">6 фильмов</span><span
-            class="only-day-after">6 фильмов</span><span class="only-week">6 фильмов</span><span
+        <p class="film-count"><span class="only-today">{{ movies_count }} фильмов</span><span class="only-tomorrow">{{ movies_count }} фильмов</span><span
+            class="only-day-after">{{ movies_count }} фильмов</span><span class="only-week">6 фильмов</span><span
             class="count-divider">/</span> Выберите свою историю</p>
         <span class="format">ВСЕ ФИЛЬМЫ В 2D <span aria-hidden="true">↙</span></span>
       </div>
     </section>
 
     <section class="movie-grid" aria-label="Фильмы в прокате">
+      {% for movie in movies %}
       <article class="movie-card">
-        <a class="movie-card-link" href="movies/1">
-        <div class="poster"><img src="../static/images/dune.jpg" alt="Постер фильма «Дюна: Часть вторая»" width="780"
-            height="1170" fetchpriority="high"><span class="poster-tag">ВЫБОР РЕДАКЦИИ</span><span class="age"
-            aria-label="Возрастной рейтинг 12 плюс">12+</span>
+        <a class="movie-card-link" href="movies/{{ movie["id"] }}">
+        <div class="poster"><img src="../static/images/{{ movie["poster"] }}" alt="Постер фильма «{{ movie["title"] }}»" width="780"
+            height="1170" fetchpriority="high">
+            {% if movie["tag"] %}
+            <span class="poster-tag">{{ movie["tag"] }}</span>
+            {% endif %}
+            <span class="age"
+            aria-label="Возрастной рейтинг {{ movie["age_rating"] }}">{{ movie["age_rating"] }}</span>
         </div>
-        <div class="movie-meta"><span role="img" aria-label="США">🇺🇸</span><span>166 мин</span></div>
-        <h2>Дюна: Часть вторая</h2>
-        <p class="genres">Фантастика <span>·</span> Приключения</p>
+        <div class="movie-meta"><span role="img" aria-label="{{ movie["country"] }}">{{ movie["country_flag"] }}</span><span>{{ movie["duration_minutes"] }} мин</span></div>
+        <h2>{{ movie["title"] }}</h2>
+        <p class="genres">{{ " · ".join(movie["genres"]) }}</p>
         </a>
       </article>
-      <article class="movie-card">
-        <a class="movie-card-link" href="movies/2">
-        <div class="poster"><img src="../static/images/interstellar.jpg" alt="Постер фильма «Интерстеллар»" width="780"
-            height="1170"><span class="poster-tag tag-light">СНОВА НА БОЛЬШОМ ЭКРАНЕ</span><span class="age"
-            aria-label="Возрастной рейтинг 12 плюс">12+</span>
-        </div>
-        <div class="movie-meta"><span role="img" aria-label="США">🇺🇸</span><span>169 мин</span></div>
-        <h2>Интерстеллар</h2>
-        <p class="genres">Фантастика <span>·</span> Драма</p>
-        </a>
-      </article>
-      <article class="movie-card">
-        <a class="movie-card-link" href="movies/3">
-        <div class="poster"><img src="../static/images/budapest.jpg" alt="Постер фильма «Отель „Гранд Будапешт“»"
-            width="780" height="1170"><span class="age" aria-label="Возрастной рейтинг 16 плюс">16+</span></div>
-        <div class="movie-meta"><span role="img" aria-label="США">🇺🇸</span><span>100 мин</span></div>
-        <h2>Отель «Гранд Будапешт»</h2>
-        <p class="genres">Комедия <span>·</span> Приключения</p>
-        </a>
-      </article>
-      <article class="movie-card">
-        <a class="movie-card-link" href="movies/4">
-        <div class="poster"><img src="../static/images/soul.jpg" alt="Постер мультфильма «Душа»" width="780"
-            height="1170" loading="lazy"><span class="poster-tag tag-light">ДЛЯ ВСЕЙ СЕМЬИ</span><span class="age"
-            aria-label="Возрастной рейтинг 6 плюс">6+</span>
-        </div>
-        <div class="movie-meta"><span role="img" aria-label="США">🇺🇸</span><span>106 мин</span></div>
-        <h2>Душа</h2>
-        <p class="genres">Анимация <span>·</span> Фэнтези</p>
-        </a>
-      </article>
-      <article class="movie-card">
-        <a class="movie-card-link" href="movies/5">
-        <div class="poster"><img src="../static/images/oppenheimer.jpg" alt="Постер фильма «Оппенгеймер»" width="780"
-            height="1170" loading="lazy"><span class="age" aria-label="Возрастной рейтинг 18 плюс">18+</span></div>
-        <div class="movie-meta"><span role="img" aria-label="США">🇺🇸</span><span>180 мин</span></div>
-        <h2>Оппенгеймер</h2>
-        <p class="genres">Биография <span>·</span> Драма</p>
-        </a>
-      </article>
-      <article class="movie-card">
-        <a class="movie-card-link" href="movies/6">
-        <div class="poster"><img src="../static/images/poor-things.jpg" alt="Постер фильма «Бедные-несчастные»"
-            width="780" height="1170" loading="lazy"><span class="age"
-            aria-label="Возрастной рейтинг 18 плюс">18+</span>
-        </div>
-        <div class="movie-meta"><span role="img" aria-label="США">🇺🇸</span><span>141 мин</span></div>
-        <h2>Бедные-несчастные</h2>
-        <p class="genres">Фэнтези <span>·</span> Мелодрама</p>
-        </a>
-      </article>
+      {% endfor %}
+
     </section>
 
     <nav class="next-day" aria-label="Следующий день афиши">

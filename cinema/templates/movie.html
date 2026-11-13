@@ -49,18 +49,17 @@
     <nav class="film-breadcrumbs" aria-label="Хлебные крошки">
       <a href="/"><span aria-hidden="true">←</span> К афише</a>
       <span aria-hidden="true">/</span>
-      <span aria-current="page">Дюна: Часть вторая</span>
+      <span aria-current="page">{{ movie["title"] }}</span>
     </nav>
 
     <header class="film-heading">
       <div class="eyebrow"><span></span> БОЛЬШОЕ КИНО. БОЛЬШОЕ ПУТЕШЕСТВИЕ.</div>
-      <h1>Дюна: Часть вторая<span class="accent">.</span></h1>
-      <p class="film-original-title" lang="en">Dune: Part Two</p>
+      <h1>{{ movie["title"] }}<span class="accent">.</span></h1>
       <ul class="film-facts" aria-label="Информация о фильме">
-        <li><span role="img" aria-label="США">🇺🇸</span> США</li>
-        <li>166 мин <span class="film-facts-note">/ 2 ч 46 мин</span></li>
-        <li>Фантастика · Приключения</li>
-        <li><span class="film-age" aria-label="Возрастной рейтинг 12 плюс">12+</span></li>
+        <li><span role="img" aria-label="{{ movie["country"] }}">{{ movie["country_flag"] }}</span> США</li>
+        <li>{{ movie["duration_minutes"] }} мин <span class="film-facts-note">/ {{ movie["duration_minutes"] // 60 }} ч {{ movie["duration_minutes"] % 60 }} мин</span></li>
+        <li>{{ " * ".join(movie["genres"]) }}</li>
+        <li><span class="film-age" aria-label="Возрастной рейтинг {{ movie["age_rating"] }}">{{ movie["age_rating"] }}</span></li>
       </ul>
     </header>
 
@@ -69,25 +68,19 @@
         <section aria-labelledby="trailer-title">
           <h2 class="film-section-label" id="trailer-title">Трейлер</h2>
           <div class="film-trailer">
-            <iframe src="https://www.youtube-nocookie.com/embed/Way9Dexny3w"
-              title="Дюна: Часть вторая — официальный трейлер Warner Bros. Pictures (на английском языке)"
+            <iframe src="https://www.youtube-nocookie.com/embed/{{ movie["trailer_id"] }}"
+              title="{{ movie["title"] }}"
               width="960" height="540" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen></iframe>
           </div>
           <p class="film-trailer-caption"><span>Официальный трейлер · На английском языке</span>
-            <a href="https://www.youtube.com/watch?v=Way9Dexny3w" target="_blank" rel="noopener noreferrer">Смотреть на YouTube <span aria-hidden="true">↗</span></a>
+            <a href="https://www.youtube.com/watch?v={{ movie["trailer_id"] }}" target="_blank" rel="noopener noreferrer">Смотреть на YouTube <span aria-hidden="true">↗</span></a>
           </p>
         </section>
 
         <section class="film-description" aria-labelledby="description-title">
-          <h2 id="description-title">Каждая история начинается с выбора<span class="accent">.</span></h2>
-          <p>На пустынной планете Арракис Пол Атрейдес находит союзников среди фременов.
-            Вместе с Чани он учится жить в мире песков и готовится противостоять Харконненам,
-            уничтожившим его семью.</p>
-          <p>Но борьба за справедливость становится чем-то большим, чем личная месть.
-            Между любовью, долгом и тревожными видениями будущего Полу предстоит выбрать путь,
-            от которого зависит судьба целой вселенной.</p>
+          <p>{{ movie["synopsis"] }}</p>
         </section>
       </div>
 
@@ -95,18 +88,13 @@
         <h2 class="film-section-label" id="credits-title">За кадром и в кадре</h2>
         <dl>
           <dt>Режиссёр</dt>
-          <dd>Дени Вильнёв</dd>
+          <dd>{{ movie["director"] }}</dd>
           <dt>В главных ролях</dt>
           <dd>
             <ul class="film-cast">
-              <li>Тимоти Шаламе</li>
-              <li>Зендея</li>
-              <li>Ребекка Фергюсон</li>
-              <li>Остин Батлер</li>
-              <li>Флоренс Пью</li>
-              <li>Хавьер Бардем</li>
-              <li>Джош Бролин</li>
-              <li>Кристофер Уокен</li>
+              {% for actor in movie["top_cast"] %}
+              <li>{{ actor }}</li>
+              {% endfor %}
             </ul>
           </dd>
         </dl>

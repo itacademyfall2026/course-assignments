@@ -1,19 +1,51 @@
 from datetime import datetime
+from secrets import token_hex
 
-from flask import Flask, request, abort, jsonify, render_template
+from flask import Flask, request, abort, jsonify, render_template, make_response, redirect, url_for, session
 
 from .data import MOVIES  # Относительный импорт
 
 
 app = Flask(__name__)
+app.secret_key = token_hex()
 
 message = "Всем привет!"
 counter = 0
 
-@app.route("/", methods=["GET", "POST", "DELETE"])
+@app.get("/")
 def index():
-    if request.method == "GET":
-        return render_template("index.html", now=datetime.now(), abracadabra="ABC")
+    print(session.get("password"))
+    content = render_template(
+        "index.html",
+        movies=MOVIES,
+        movies_count=len(MOVIES),
+        username=request.cookies.get("username"),
+    )
+    response = make_response(content)
+    response.status = 201
+    response.headers["Server"] = "Apache 2.0"
+    if request.cookies.get("abc") is None:
+        response.set_cookie(key="abc", value="def")
+    return response
+
+
+@app.get("/login")
+def get_login_page():
+    return render_template("login.html")
+
+
+@app.post("/login")
+def login():
+    response = redirect(url_for("index"))
+    response.set_cookie(key="username", value=request.form["username"])
+    session["password"] = request.form["password"]
+    return response
+
+
+@app.get("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("index"))
 
 
 @app.get("/faq")
@@ -22,10 +54,10 @@ def faq():
 
 @app.route("/movies/<int:movie_id>")
 def get_movie(movie_id):
-    try:
-        return render_template(f"movies/{movie_id}.html")
-    except:
-        abort(404)
+    for movie in MOVIES:
+        if movie["id"] == movie_id:
+            return render_template(f"movie.html", movie=movie)
+    abort(404)
 
 @app.errorhandler(404)
 def handle_404(error):
