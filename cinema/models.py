@@ -22,12 +22,10 @@ class Movie:
     title: Mapped[str]
     poster: Mapped[str]
     tag: Mapped[str | None] # то же самое, что и mapped_column(nullable=True)
-    age_rating: Mapped[str] = mapped_column(default="0+")
     country: Mapped[str]
     country_flag: Mapped[str]
     duration_minutes: Mapped[int]
     genres: Mapped[list[str]] = mapped_column(JSON)
-    format: Mapped[str] = mapped_column(String(2), default="2D")
     director: Mapped[str]
     top_cast: Mapped[list[str]] = mapped_column(JSON)
     synopsis: Mapped[str] = mapped_column(Text)
@@ -36,6 +34,8 @@ class Movie:
         back_populates="movie",
         cascade="all, delete-orphan",
     )
+    age_rating: Mapped[str] = mapped_column(default="0+")
+    format: Mapped[str] = mapped_column(String(2), default="2D")
 
 
 @mapper_registry.mapped_as_dataclass
