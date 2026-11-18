@@ -1,51 +1,97 @@
 from dataclasses import dataclass
 from datetime import datetime
 
+from sqlalchemy.orm import registry
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import relationship
+from sqlalchemy import JSON
+from sqlalchemy import String
+from sqlalchemy import Text
+from sqlalchemy import ForeignKey
 
-@dataclass
+
+mapper_registry = registry()
+
+
+@mapper_registry.mapped_as_dataclass
 class Movie:
-    id: int
-    title: str
-    poster: str
-    tag: str | None
-    age_rating: str
-    country: str
-    country_flag: str
-    duration_minutes: int
-    genres: list[str]
-    format: str
-    director: str
-    top_cast: list[str]
-    synopsis: str
-    trailer_id: str
+    __tablename__ = "movies"
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    title: Mapped[str]
+    poster: Mapped[str]
+    tag: Mapped[str | None] # то же самое, что и mapped_column(nullable=True)
+    age_rating: Mapped[str] = mapped_column(default="0+")
+    country: Mapped[str]
+    country_flag: Mapped[str]
+    duration_minutes: Mapped[int]
+    genres: Mapped[list[str]] = mapped_column(JSON)
+    format: Mapped[str] = mapped_column(String(2), default="2D")
+    director: Mapped[str]
+    top_cast: Mapped[list[str]] = mapped_column(JSON)
+    synopsis: Mapped[str] = mapped_column(Text)
+    trailer_id: Mapped[str] = mapped_column(String(22))
+    screenings: Mapped[list["Screening"]] = relationship(
+        back_populates="movie",
+        cascade="all, delete-orphan",
+    )
 
 
-@dataclass
+@mapper_registry.mapped_as_dataclass
 class Hall:
-    id: int
-    name: str
-    description: str
-    image: str
-    seats: list["Seat"]
+    __tablename__ = "halls"
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    name: Mapped[str]
+    description: Mapped[str] = mapped_column(Text)
+    image: Mapped[str]
+    seats: Mapped[list["Seat"]] = relationship(
+        back_populates="hall",
+        cascade="all, delete-orphan",
+    )
+    screenings: Mapped[list["Screening"]] = relationship(
+        back_populates="hall",
+        cascade="all, delete-orphan",
+    )
 
 
-@dataclass
+@mapper_registry.mapped_as_dataclass
 class Seat:
-    id: int
-    row: int
-    number: int
+    __tablename__ = "seats"
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    row: Mapped[int]
+    number: Mapped[int]
+    hall_id: Mapped[int] = mapped_column(ForeignKey("halls.id", ondelete="CASCADE"))
+    hall: Mapped[Hall] = relationship(back_populates="seats")
+    tickets: Mapped[list["Ticket"]] = relationship(
+        back_populates="seat",
+        cascade="all, delete-orphan",
+    )
 
 
-@dataclass
+@mapper_registry.mapped_as_dataclass
 class Screening:
-    id: int
-    movie: Movie
-    hall: Hall
-    start: datetime
+    __tablename__ = "screenings"
 
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    movie_id: Mapped[int] = mapped_column(ForeignKey("movies.id", ondelete="CASCADE"))
+    movie: Mapped[Movie] = relationship(back_populates="screenings")
+    hall_id: Mapped[int] = mapped_column(ForeignKey("halls.id", ondelete="CASCADE"))
+    hall: Mapped[Hall] = relationship(back_populates="screenings")
+    start: Mapped[datetime]
+    tickets: Mapped[list["Ticket"]] = relationship(
+        back_populates="screening",
+        cascade="all, delete-orphan",
+    )
 
-@dataclass
+@mapper_registry.mapped_as_dataclass
 class Ticket:
-    id: int
-    screening: Screening
-    seat: Seat
+    __tablename__ = "tickets"
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    screening_id: Mapped[int] = mapped_column(ForeignKey("screenings.id", ondelete="CASCADE"))
+    screening: Mapped[Screening] = relationship(back_populates="tickets")
+    seat_id: Mapped[int] = mapped_column(ForeignKey("seats.id", ondelete="CASCADE"))
+    seat: Mapped[Seat] = relationship(back_populates="tickets")
