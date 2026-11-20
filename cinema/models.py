@@ -33,6 +33,7 @@ class Movie:
     screenings: Mapped[list["Screening"]] = relationship(
         back_populates="movie",
         cascade="all, delete-orphan",
+        repr=False,
     )
     age_rating: Mapped[str] = mapped_column(default="0+")
     format: Mapped[str] = mapped_column(String(2), default="2D")
@@ -49,10 +50,12 @@ class Hall:
     seats: Mapped[list["Seat"]] = relationship(
         back_populates="hall",
         cascade="all, delete-orphan",
+        repr=False,
     )
     screenings: Mapped[list["Screening"]] = relationship(
         back_populates="hall",
         cascade="all, delete-orphan",
+        repr=False,
     )
 
 
@@ -68,6 +71,7 @@ class Seat:
     tickets: Mapped[list["Ticket"]] = relationship(
         back_populates="seat",
         cascade="all, delete-orphan",
+        repr=False,
     )
 
 
@@ -77,13 +81,14 @@ class Screening:
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     movie_id: Mapped[int] = mapped_column(ForeignKey("movies.id", ondelete="CASCADE"))
-    movie: Mapped[Movie] = relationship(back_populates="screenings")
+    movie: Mapped[Movie] = relationship(back_populates="screenings", repr=False)
     hall_id: Mapped[int] = mapped_column(ForeignKey("halls.id", ondelete="CASCADE"))
-    hall: Mapped[Hall] = relationship(back_populates="screenings")
+    hall: Mapped[Hall] = relationship(back_populates="screenings", repr=False)
     start: Mapped[datetime]
     tickets: Mapped[list["Ticket"]] = relationship(
         back_populates="screening",
         cascade="all, delete-orphan",
+        repr=False,
     )
 
 @mapper_registry.mapped_as_dataclass
@@ -92,6 +97,6 @@ class Ticket:
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     screening_id: Mapped[int] = mapped_column(ForeignKey("screenings.id", ondelete="CASCADE"))
-    screening: Mapped[Screening] = relationship(back_populates="tickets")
+    screening: Mapped[Screening] = relationship(back_populates="tickets", repr=False)
     seat_id: Mapped[int] = mapped_column(ForeignKey("seats.id", ondelete="CASCADE"))
-    seat: Mapped[Seat] = relationship(back_populates="tickets")
+    seat: Mapped[Seat] = relationship(back_populates="tickets", repr=False)
